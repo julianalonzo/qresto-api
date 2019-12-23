@@ -1,0 +1,28 @@
+{
+  "name": "qresto",
+  "version": "1.0.0",
+  "description": "An online platform where restaurant owners can publish their menu and customers can make orders",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon --exec babel-node src/index.js",
+    "clean": "rm -rf dist",
+    "build-babel": "babel -d dist src -s",
+    "build": "npm run clean && npm run build-babel",
+    "start": "npm run build && node dist/index.js"
+  },
+  "repository": "https://github.com/julianalonzo/qresto.git",
+  "author": "Julian Aubrey Alonzo <julianaubreya@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/cli": "^7.7.7",
+    "@babel/core": "^7.7.7",
+    "@babel/node": "^7.7.7",
+    "@babel/preset-env": "^7.7.7",
+    "nodemon": "^2.0.2"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.7.0",
+    "express": "^4.17.1"
+  }
+}
