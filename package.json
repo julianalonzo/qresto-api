@@ -4,7 +4,7 @@
   "description": "An online platform where restaurant owners can publish their menu and customers can make orders",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest src --watch",
     "dev": "nodemon --exec babel-node src/index.js",
     "clean": "rm -rf dist",
     "build-babel": "babel -d dist src -s",
@@ -19,12 +19,14 @@
     "@babel/core": "^7.7.7",
     "@babel/node": "^7.7.7",
     "@babel/preset-env": "^7.7.7",
+    "babel-jest": "^24.9.0",
     "eslint": "^6.8.0",
     "eslint-config-standard": "^14.1.0",
     "eslint-plugin-import": "^2.19.1",
     "eslint-plugin-node": "^10.0.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
+    "jest": "^24.9.0",
     "nodemon": "^2.0.2",
     "prettier": "^1.19.1"
   },
