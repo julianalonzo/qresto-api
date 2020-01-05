@@ -26,16 +26,18 @@ export default function buildFood ({ Id }) {
     }
 
     return Object.freeze({
+      getId: () => id,
       getName: () => name,
       getPrice: () => price,
       isAvailable: () => available,
+      isDeleted: () => deleted,
+      getRestaurantId: () => restaurantId,
       markAvailable: () => {
         available = true
       },
       markUnavailable: () => {
         available = false
       },
-      isDeleted: () => deleted,
       markDeleted: () => {
         deleted = true
       },
