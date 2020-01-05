@@ -62,7 +62,6 @@ describe('food', () => {
     const food = makeFood(fakeFood)
     food.markDeleted()
     expect(food.isDeleted()).toBe(true)
-    expect(food.getName()).stringMatching(/^\[DELETED\]/)
   })
 
   it('can be restored', () => {
@@ -71,7 +70,6 @@ describe('food', () => {
     food.markDeleted()
     food.markRestored()
     expect(food.isDeleted()).toBe(false)
-    expect(food.getName()).not.stringMatching(/^\[DELETED\]/)
   })
 
   it('must have a valid restaurant id', () => {
