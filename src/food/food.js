@@ -1,5 +1,10 @@
 export default function buildFood ({ Id }) {
-  return function makeFood ({ id = Id.makeId(), name, price } = {}) {
+  return function makeFood ({
+    id = Id.makeId(),
+    name,
+    price,
+    available = true
+  } = {}) {
     if (!name) {
       throw new Error('Food must have a name')
     }
@@ -13,5 +18,15 @@ export default function buildFood ({ Id }) {
     if (!Id.isValidId(id)) {
       throw new Error('Food must have a valid id')
     }
+
+    return Object.freeze({
+      isAvailable: () => available,
+      markAvailable: () => {
+        available = true
+      },
+      markUnavailable: () => {
+        available = false
+      }
+    })
   }
 }
