@@ -33,6 +33,9 @@ export default function buildFood ({ Id }) {
       isDeleted: () => deleted,
       markDeleted: () => {
         deleted = true
+      },
+      markRestored: () => {
+        deleted = false
       }
     })
   }
