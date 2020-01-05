@@ -45,25 +45,25 @@ describe('food', () => {
   it('can be available', () => {
     const fakeAvailableFood = makeFakeFood({ available: true })
     const food = makeFood(fakeAvailableFood)
-    expect(() => food.isAvailable()).toBe(true)
+    expect(food.isAvailable()).toBe(true)
     food.markUnavailable()
-    expect(() => food.isAvailable()).toBe(false)
+    expect(food.isAvailable()).toBe(false)
   })
 
   it('can be unavailable', () => {
     const fakeUnavailableFood = makeFakeFood({ available: false })
     const food = makeFood(fakeUnavailableFood)
-    expect(() => food.isAvailable()).toBe(false)
+    expect(food.isAvailable()).toBe(false)
     food.markAvailable()
-    expect(() => food.isAvailable()).toBe(true)
+    expect(food.isAvailable()).toBe(true)
   })
 
   it('can be marked deleted', () => {
     const fakeFood = makeFakeFood()
     const food = makeFood(fakeFood)
     food.markDeleted()
-    expect(() => food.isDeleted()).toBe(true)
-    expect(() => food.getName()).stringMatching(/^\[DELETED\]/)
+    expect(food.isDeleted()).toBe(true)
+    expect(food.getName()).stringMatching(/^\[DELETED\]/)
   })
 
   it('can be restored', () => {
@@ -71,8 +71,8 @@ describe('food', () => {
     const food = makeFood(fakeFood)
     food.markDeleted()
     food.markRestored()
-    expect(() => food.isDeleted()).toBe(false)
-    expect(() => food.getName()).not.stringMatching(/^\[DELETED\]/)
+    expect(food.isDeleted()).toBe(false)
+    expect(food.getName()).not.stringMatching(/^\[DELETED\]/)
   })
 
   it('must have a valid restaurant id', () => {
