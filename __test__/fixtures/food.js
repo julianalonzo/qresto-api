@@ -2,8 +2,7 @@ import faker from 'faker'
 import uuid from 'uuid/v4'
 
 const Id = Object.freeze({
-  makeId: uuid,
-  isValidId: uuid.isUuid
+  makeId: uuid
 })
 
 export default function makeFakeFood (overrides) {
