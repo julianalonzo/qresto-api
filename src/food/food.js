@@ -4,8 +4,13 @@ export default function buildFood ({ Id }) {
     name,
     price = 0,
     available = true,
-    deleted = false
+    deleted = false,
+    restaurantId
   } = {}) {
+    if (!Id.isValidId(id)) {
+      throw new Error('Food must have a valid id')
+    }
+
     if (!name) {
       throw new Error('Food must have a name')
     }
@@ -16,8 +21,8 @@ export default function buildFood ({ Id }) {
       throw new Error('Food cannot have a negative price')
     }
 
-    if (!Id.isValidId(id)) {
-      throw new Error('Food must have a valid id')
+    if (!Id.isValidId(restaurantId)) {
+      throw new Error('Food must have a valid restaurant id')
     }
 
     return Object.freeze({
