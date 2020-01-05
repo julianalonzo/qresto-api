@@ -12,6 +12,7 @@ export default function makeFakeFood (overrides) {
     description: faker.lorem.sentences(2),
     price: faker.commerce.price(),
     available: faker.random.boolean(),
+    deleted: faker.random.boolean(),
     restaurantId: Id.makeId()
   }
 
