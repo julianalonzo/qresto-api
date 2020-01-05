@@ -8,7 +8,7 @@ describe('food', () => {
   })
 
   it('must have a valid price', () => {
-    const fakeFoodWithUndefinedPrice = makeFood({ price: undefined })
+    const fakeFoodWithUndefinedPrice = makeFakeFood({ price: undefined })
     expect(() => makeFood(fakeFoodWithUndefinedPrice)).toThrow(
       'Food must have a numerical price'
     )
