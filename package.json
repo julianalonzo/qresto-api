@@ -8,8 +8,9 @@
     "dev": "nodemon --exec babel-node src/index.js",
     "clean": "rm -rf dist",
     "build-babel": "babel -d dist src -s",
-    "build": "npm run clean && npm run build-babel",
-    "start": "npm run build && node dist/index.js"
+    "build": "yarn run clean && npm run build-babel",
+    "start": "yarn run build && node dist/index.js",
+    "format": "yarn run prettier --write src/**/*.js"
   },
   "repository": "https://github.com/julianalonzo/qresto.git",
   "author": "Julian Aubrey Alonzo <julianaubreya@gmail.com>",
