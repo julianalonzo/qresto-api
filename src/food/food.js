@@ -2,7 +2,7 @@ export default function buildFood ({ Id }) {
   return function makeFood ({
     id = Id.makeId(),
     name,
-    price,
+    price = 0,
     available = true
   } = {}) {
     if (!name) {
@@ -20,6 +20,7 @@ export default function buildFood ({ Id }) {
     }
 
     return Object.freeze({
+      getPrice: () => price,
       isAvailable: () => available,
       markAvailable: () => {
         available = true
