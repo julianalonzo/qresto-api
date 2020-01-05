@@ -3,7 +3,8 @@ export default function buildFood ({ Id }) {
     id = Id.makeId(),
     name,
     price = 0,
-    available = true
+    available = true,
+    deleted = false
   } = {}) {
     if (!name) {
       throw new Error('Food must have a name')
@@ -20,6 +21,7 @@ export default function buildFood ({ Id }) {
     }
 
     return Object.freeze({
+      getName: () => name,
       getPrice: () => price,
       isAvailable: () => available,
       markAvailable: () => {
@@ -27,6 +29,10 @@ export default function buildFood ({ Id }) {
       },
       markUnavailable: () => {
         available = false
+      },
+      isDeleted: () => deleted,
+      markDeleted: () => {
+        deleted = true
       }
     })
   }
