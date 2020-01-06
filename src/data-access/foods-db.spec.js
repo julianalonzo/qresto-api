@@ -12,6 +12,7 @@ describe('foods db', () => {
   it('inserts a food', async () => {
     const food = makeFakeFood()
     const result = await foodsDb.insert(food)
+
     return expect(result).toEqual(food)
   })
 
@@ -21,7 +22,9 @@ describe('foods db', () => {
         foodsDb.insert(insert)
       )
     )
+
     const found = await foodsDb.findAll()
+
     expect.assertions(inserts.length)
     return inserts.forEach(insert => expect(found).toContainEqual(insert))
   })
@@ -36,10 +39,13 @@ describe('foods db', () => {
         makeFakeFood({ available: false })
       ].map(insert => foodsDb.insert(insert))
     )
+
     const found = await foodsDb.findAll({ available: true })
+
     const availableFoodInserts = inserts.filter(
       insert => insert.available === true
     )
+
     expect.assertions(availableFoodInserts.length)
     return availableFoodInserts.forEach(insert =>
       expect(found).toContainEqual(insert)
@@ -56,8 +62,11 @@ describe('foods db', () => {
         makeFakeFood({ deleted: false })
       ].map(insert => foodsDb.insert(insert))
     )
+
     const found = await foodsDb.findAll({ deleted: true })
+
     const deletedFoodInserts = inserts.filter(insert => insert.deleted)
+
     expect.assertions(deletedFoodInserts.length)
     return deletedFoodInserts.forEach(insert =>
       expect(found).toContainEqual(insert)
@@ -67,21 +76,35 @@ describe('foods db', () => {
   it('finds a food by id', async () => {
     const food = makeFakeFood()
     await foodsDb.insert(food)
+
     const found = await foodsDb.findById(food)
+
     expect(found).toEqual(food)
   })
 
-  it('updates a food name', async () => {
+  it('updates a food', async () => {
     const food = makeFakeFood()
     await foodsDb.insert(food)
+
     food.name = 'Hamburger'
+    food.description = 'This is a hamburger'
+    food.price = 123
+    food.available = true
+    food.deleted = false
+
     const updated = await foodsDb.update(food)
-    return expect(updated.name).toBe('Hamburger')
+
+    expect(updated.name).toBe('Hamburger')
+    expect(updated.description).toBe('This is a hamburger')
+    expect(updated.price).toBe(123)
+    expect(updated.available).toBe(true)
+    expect(updated.deleted).toBe(false)
   })
 
   it('deletes a food', async () => {
     const food = makeFakeFood()
     await foodsDb.insert(food)
+
     return expect(await foodsDb.remove(food)).toBe(1)
   })
 })
