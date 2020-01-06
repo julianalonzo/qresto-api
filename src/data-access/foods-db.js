@@ -5,7 +5,8 @@ export default function makeFoodsDb ({ makeDb }) {
     insert,
     findAll,
     findById,
-    update
+    update,
+    remove
   })
 
   async function insert ({ id = Id.makeId(), ...foodInfo }) {
@@ -35,5 +36,14 @@ export default function makeFoodsDb ({ makeDb }) {
       { where: { id: id } }
     )
     return affectedRows > 0 ? { id, ...foodInfo } : null
+  }
+
+  async function remove ({ id }) {
+    const db = await makeDb()
+    const [affectedRows] = await db.Food.update(
+      { deleted: true },
+      { where: { id: id } }
+    )
+    return affectedRows
   }
 }
