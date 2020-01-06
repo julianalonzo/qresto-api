@@ -13,7 +13,7 @@ describe('foods db', () => {
     const food = makeFakeFood()
     const result = await foodsDb.insert(food)
 
-    return expect(result).toEqual(food)
+    expect(result).toEqual(food)
   })
 
   it('lists foods', async () => {
@@ -26,7 +26,7 @@ describe('foods db', () => {
     const found = await foodsDb.findAll()
 
     expect.assertions(inserts.length)
-    return inserts.forEach(insert => expect(found).toContainEqual(insert))
+    inserts.forEach(insert => expect(found).toContainEqual(insert))
   })
 
   it('can list available foods only', async () => {
@@ -47,7 +47,7 @@ describe('foods db', () => {
     )
 
     expect.assertions(availableFoodInserts.length)
-    return availableFoodInserts.forEach(insert =>
+    availableFoodInserts.forEach(insert =>
       expect(found).toContainEqual(insert)
     )
   })
@@ -105,6 +105,6 @@ describe('foods db', () => {
     const food = makeFakeFood()
     await foodsDb.insert(food)
 
-    return expect(await foodsDb.remove(food)).toBe(1)
+    expect(await foodsDb.remove(food)).toBe(1)
   })
 })
