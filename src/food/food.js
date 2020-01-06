@@ -2,6 +2,7 @@ export default function buildFood ({ Id }) {
   return function makeFood ({
     id = Id.makeId(),
     name,
+    description = '',
     price = 0,
     available = true,
     deleted = false,
@@ -28,6 +29,7 @@ export default function buildFood ({ Id }) {
     return Object.freeze({
       getId: () => id,
       getName: () => name,
+      getDescription: () => description,
       getPrice: () => price,
       isAvailable: () => available,
       isDeleted: () => deleted,
