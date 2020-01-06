@@ -4,7 +4,8 @@ export default function makeFoodsDb ({ makeDb }) {
   return Object.freeze({
     insert,
     findAll,
-    findById
+    findById,
+    update
   })
 
   async function insert ({ id = Id.makeId(), ...foodInfo }) {
@@ -25,5 +26,12 @@ export default function makeFoodsDb ({ makeDb }) {
     const db = await makeDb()
     const result = await db.Food.findByPk(id)
     return result.dataValues
+  }
+
+  async function update ({ id, ...foodInfo }) {
+    const db = await makeDb()
+    await db.Food.update({ ...foodInfo }, { where: { id: id } })
+    const updatedFood = await db.Food.findByPk(id)
+    return updatedFood.dataValues
   }
 }
