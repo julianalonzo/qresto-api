@@ -16,26 +16,30 @@ describe('foods db', () => {
   })
 
   it('lists foods', async () => {
-    const inserts = await Promise.all([
-      makeFakeFood(),
-      makeFakeFood(),
-      makeFakeFood()
-    ].map(insert => foodsDb.insert(insert)))
+    const inserts = await Promise.all(
+      [makeFakeFood(), makeFakeFood(), makeFakeFood()].map(insert =>
+        foodsDb.insert(insert)
+      )
+    )
     const found = await foodsDb.findAll()
     expect.assertions(inserts.length)
     return inserts.forEach(insert => expect(found).toContainEqual(insert))
   })
 
   it('can list available foods only', async () => {
-    const inserts = await Promise.all([
-      makeFakeFood({ available: true }),
-      makeFakeFood({ available: true }),
-      makeFakeFood({ available: true }),
-      makeFakeFood({ available: false }),
-      makeFakeFood({ available: false })
-    ].map(insert => foodsDb.insert(insert)))
+    const inserts = await Promise.all(
+      [
+        makeFakeFood({ available: true }),
+        makeFakeFood({ available: true }),
+        makeFakeFood({ available: true }),
+        makeFakeFood({ available: false }),
+        makeFakeFood({ available: false })
+      ].map(insert => foodsDb.insert(insert))
+    )
     const found = await foodsDb.findAll({ available: true })
-    const availableFoodInserts = inserts.filter(insert => insert.available === true)
+    const availableFoodInserts = inserts.filter(
+      insert => insert.available === true
+    )
     expect.assertions(availableFoodInserts.length)
     return availableFoodInserts.forEach(insert =>
       expect(found).toContainEqual(insert)
@@ -43,13 +47,15 @@ describe('foods db', () => {
   })
 
   it('can list deleted foods only', async () => {
-    const inserts = await Promise.all([
-      makeFakeFood({ deleted: true }),
-      makeFakeFood({ deleted: true }),
-      makeFakeFood({ deleted: true }),
-      makeFakeFood({ deleted: false }),
-      makeFakeFood({ deleted: false })
-    ].map(insert => foodsDb.insert(insert)))
+    const inserts = await Promise.all(
+      [
+        makeFakeFood({ deleted: true }),
+        makeFakeFood({ deleted: true }),
+        makeFakeFood({ deleted: true }),
+        makeFakeFood({ deleted: false }),
+        makeFakeFood({ deleted: false })
+      ].map(insert => foodsDb.insert(insert))
+    )
     const found = await foodsDb.findAll({ deleted: true })
     const deletedFoodInserts = inserts.filter(insert => insert.deleted)
     expect.assertions(deletedFoodInserts.length)
