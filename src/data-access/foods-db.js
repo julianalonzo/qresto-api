@@ -30,8 +30,10 @@ export default function makeFoodsDb ({ makeDb }) {
 
   async function update ({ id, ...foodInfo }) {
     const db = await makeDb()
-    await db.Food.update({ ...foodInfo }, { where: { id: id } })
-    const updatedFood = await db.Food.findByPk(id)
-    return updatedFood.dataValues
+    const [affectedRows] = await db.Food.update(
+      { ...foodInfo },
+      { where: { id: id } }
+    )
+    return affectedRows > 0 ? { id, ...foodInfo } : null
   }
 }
