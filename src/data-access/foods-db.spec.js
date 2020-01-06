@@ -33,9 +33,9 @@ describe('foods db', () => {
       makeFakeFood({ available: true }),
       makeFakeFood({ available: false }),
       makeFakeFood({ available: false })
-    ])
+    ].map(insert => foodsDb.insert(insert)))
     const found = await foodsDb.findAll({ available: true })
-    const availableFoodInserts = inserts.filter(insert => insert.available)
+    const availableFoodInserts = inserts.filter(insert => insert.available === true)
     expect.assertions(availableFoodInserts.length)
     return availableFoodInserts.forEach(insert =>
       expect(found).toContainEqual(insert)
@@ -49,7 +49,7 @@ describe('foods db', () => {
       makeFakeFood({ deleted: true }),
       makeFakeFood({ deleted: false }),
       makeFakeFood({ deleted: false })
-    ])
+    ].map(insert => foodsDb.insert(insert)))
     const found = await foodsDb.findAll({ deleted: true })
     const deletedFoodInserts = inserts.filter(insert => insert.deleted)
     expect.assertions(deletedFoodInserts.length)
@@ -61,7 +61,7 @@ describe('foods db', () => {
   it('finds a food by id', async () => {
     const food = makeFakeFood()
     await foodsDb.insert(food)
-    const found = await foodsDb.findById(food)
+    const found = await foodsDb.findById(food.id)
     expect(found).toEqual(food)
   })
 
