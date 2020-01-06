@@ -67,7 +67,7 @@ describe('foods db', () => {
   it('finds a food by id', async () => {
     const food = makeFakeFood()
     await foodsDb.insert(food)
-    const found = await foodsDb.findById(food.id)
+    const found = await foodsDb.findById(food)
     expect(found).toEqual(food)
   })
 

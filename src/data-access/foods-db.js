@@ -23,7 +23,7 @@ export default function makeFoodsDb ({ makeDb }) {
     }))
   }
 
-  async function findById (id) {
+  async function findById ({ id }) {
     const db = await makeDb()
     const result = await db.Food.findByPk(id)
     return result.dataValues
