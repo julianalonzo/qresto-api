@@ -12,7 +12,7 @@ export default function makeFoodsDb ({ makeDb }) {
   async function insert ({ id = Id.makeId(), ...foodInfo }) {
     const db = await makeDb()
     const result = await db.Food.create({ id, ...foodInfo })
-    return result.dataValues
+    return result ? result.dataValues : null
   }
 
   async function findAll ({ ...query } = {}) {
@@ -26,7 +26,7 @@ export default function makeFoodsDb ({ makeDb }) {
   async function findById ({ id }) {
     const db = await makeDb()
     const result = await db.Food.findByPk(id)
-    return result.dataValues
+    return result ? result.dataValues : null
   }
 
   async function update ({ id, ...foodInfo }) {
