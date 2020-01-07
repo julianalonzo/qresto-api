@@ -40,8 +40,7 @@ export default function makeFoodsDb ({ makeDb }) {
 
   async function remove ({ id }) {
     const db = await makeDb()
-    const [affectedRows] = await db.Food.update(
-      { deleted: true },
+    const affectedRows = await db.Food.destroy(
       { where: { id: id } }
     )
     return affectedRows

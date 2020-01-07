@@ -5,7 +5,6 @@ export default function buildFood ({ Id }) {
     description = '',
     price = 0,
     available = true,
-    deleted = false,
     restaurantId
   } = {}) {
     if (!Id.isValidId(id)) {
@@ -32,19 +31,12 @@ export default function buildFood ({ Id }) {
       getDescription: () => description,
       getPrice: () => price,
       isAvailable: () => available,
-      isDeleted: () => deleted,
       getRestaurantId: () => restaurantId,
       markAvailable: () => {
         available = true
       },
       markUnavailable: () => {
         available = false
-      },
-      markDeleted: () => {
-        deleted = true
-      },
-      markRestored: () => {
-        deleted = false
       }
     })
   }

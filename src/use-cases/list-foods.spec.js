@@ -57,34 +57,6 @@ describe('get foods', () => {
     )
   })
 
-  it('can get and filter foods by deleted', async () => {
-    const inserts = await Promise.all(
-      [
-        makeFakeFood({ deleted: true }),
-        makeFakeFood({ deleted: true }),
-        makeFakeFood({ deleted: true }),
-        makeFakeFood({ deleted: true }),
-        makeFakeFood({ deleted: true }),
-        makeFakeFood({ deleted: false }),
-        makeFakeFood({ deleted: false }),
-        makeFakeFood({ deleted: false }),
-        makeFakeFood({ deleted: false })
-      ].map(insert => foodsDb.insert(insert))
-    )
-
-    const insertedDeletedFoods = inserts.filter(insert => insert.deleted)
-    const deletedFoodsFound = await getFoods({ deleted: true })
-    insertedDeletedFoods.forEach(insert =>
-      expect(deletedFoodsFound).toContainEqual(insert)
-    )
-
-    const insertedNotDeletedFoods = inserts.filter(insert => !insert.deleted)
-    const notDeletedFoodsFound = await getFoods({ deleted: false })
-    insertedNotDeletedFoods.forEach(insert =>
-      expect(notDeletedFoodsFound).toContainEqual(insert)
-    )
-  })
-
   it('can get and filter foods by restaurantId', async () => {
     const firstFakeRestaurantId = Id.makeId()
     const secondFakeRestaurantId = Id.makeId()

@@ -57,21 +57,6 @@ describe('food', () => {
     expect(food.isAvailable()).toBe(true)
   })
 
-  it('can be marked deleted', () => {
-    const fakeFood = makeFakeFood()
-    const food = makeFood(fakeFood)
-    food.markDeleted()
-    expect(food.isDeleted()).toBe(true)
-  })
-
-  it('can be restored', () => {
-    const fakeFood = makeFakeFood()
-    const food = makeFood(fakeFood)
-    food.markDeleted()
-    food.markRestored()
-    expect(food.isDeleted()).toBe(false)
-  })
-
   it('must have a valid restaurant id', () => {
     const fakeFoodWithoutRestaurant = makeFakeFood({ restaurantId: undefined })
     expect(() => makeFood(fakeFoodWithoutRestaurant)).toThrow(
