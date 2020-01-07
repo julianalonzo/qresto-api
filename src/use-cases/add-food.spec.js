@@ -17,6 +17,19 @@ describe('add food', () => {
     expect(inserted).toMatchObject(newFood)
   })
 
+  it('does not insert food without name', async () => {
+    const newFood = makeFakeFood({ name: '' })
+    expect(addFood(newFood)).rejects.toThrow('Food must have a name')
+  })
+
+  it('does not insert food without a valid price', async () => {
+    const newFood = makeFakeFood({ price: 'Hi' })
+    expect(addFood(newFood)).rejects.toThrow('Food must have a numerical price')
+
+    newFood.price = -50
+    expect(addFood(newFood)).rejects.toThrow('Food cannot have a negative price')
+  })
+
   it('is idempotent', async () => {
     const newFood = makeFakeFood()
 
