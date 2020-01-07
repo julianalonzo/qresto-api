@@ -69,7 +69,6 @@ describe('foods db', () => {
     food.description = 'This is a hamburger'
     food.price = 123
     food.available = true
-    food.deleted = false
 
     const updated = await foodsDb.update(food)
 
@@ -77,7 +76,6 @@ describe('foods db', () => {
     expect(updated.description).toBe('This is a hamburger')
     expect(updated.price).toBe(123)
     expect(updated.available).toBe(true)
-    expect(updated.deleted).toBe(false)
   })
 
   it('deletes a food', async () => {
