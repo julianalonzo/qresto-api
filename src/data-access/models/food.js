@@ -17,7 +17,7 @@ export default function makeFoodModel ({ sequelize, DataTypes }) {
     },
     available: {
       type: DataTypes.BOOLEAN,
-      defaultValue: 0
+      defaultValue: true
     },
     restaurantId: DataTypes.UUID
   })
