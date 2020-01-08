@@ -27,7 +27,9 @@ describe('add food', () => {
     expect(addFood(newFood)).rejects.toThrow('Food must have a numerical price')
 
     newFood.price = -50
-    expect(addFood(newFood)).rejects.toThrow('Food cannot have a negative price')
+    expect(addFood(newFood)).rejects.toThrow(
+      'Food cannot have a negative price'
+    )
   })
 
   it('is idempotent', async () => {

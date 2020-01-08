@@ -47,9 +47,7 @@ describe('foods db', () => {
     )
 
     expect.assertions(availableFoodInserts.length)
-    availableFoodInserts.forEach(insert =>
-      expect(found).toContainEqual(insert)
-    )
+    availableFoodInserts.forEach(insert => expect(found).toContainEqual(insert))
   })
 
   it('finds a food by id', async () => {

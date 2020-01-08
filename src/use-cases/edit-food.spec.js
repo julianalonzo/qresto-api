@@ -18,15 +18,21 @@ describe('delete food', () => {
 
   it('requires name when supplied', async () => {
     const newFood = await foodsDb.insert(makeFakeFood())
-    expect(editFood({ ...newFood, name: '' })).rejects.toThrow('Food must have a name')
+    expect(editFood({ ...newFood, name: '' })).rejects.toThrow(
+      'Food must have a name'
+    )
   })
 
   it('must have a valid price when supplied', async () => {
     const newFood = await foodsDb.insert(makeFakeFood())
 
-    expect(editFood({ ...newFood, price: 'Hi' })).rejects.toThrow('Food must have a numerical price')
+    expect(editFood({ ...newFood, price: 'Hi' })).rejects.toThrow(
+      'Food must have a numerical price'
+    )
 
-    expect(editFood({ ...newFood, price: -50 })).rejects.toThrow('Food cannot have a negative price')
+    expect(editFood({ ...newFood, price: -50 })).rejects.toThrow(
+      'Food cannot have a negative price'
+    )
   })
 
   it('must be an existing food', async () => {
