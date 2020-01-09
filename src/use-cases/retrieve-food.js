@@ -1,5 +1,5 @@
-export default function makeGetFood ({ foodsDb }) {
-  return async function getFood ({ id } = {}) {
+export default function makeRetrieveFood ({ foodsDb }) {
+  return async function retrieveFood ({ id } = {}) {
     if (!id) {
       throw new Error('Food id is required')
     }
