@@ -21,4 +21,3 @@ const foodController = Object.freeze({
 
 export default foodController
 export { deleteFood, getFoods, getFood, postFood, patchFood }
-
