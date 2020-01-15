@@ -1,4 +1,4 @@
-import makeFakeFood from '../../__test__/fixtures/food'
+import makeFakeFood from '../../../__test__/fixtures/food'
 import makeFood from './'
 
 describe('food', () => {

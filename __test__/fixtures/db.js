@@ -1,5 +1,5 @@
 import Sequelize from 'sequelize'
-import makeFoodModel from '../../src/data-access/models/food'
+import { makeFoodModel } from '../../src/data-access/food'
 
 const sequelize = new Sequelize({
   dialect: 'sqlite',

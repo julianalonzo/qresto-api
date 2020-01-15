@@ -1,7 +1,6 @@
 import dotenv from 'dotenv'
 import Sequelize from 'sequelize'
-import makeFoodModel from './models/food'
-import makeFoodsDb from './foods-db'
+import { makeFoodModel, makeFoodsDb } from './food'
 
 dotenv.config()
 

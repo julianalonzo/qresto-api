@@ -1,5 +1,5 @@
-import makeFakeFood from '../../__test__/fixtures/food'
-import makeDb from '../../__test__/fixtures/db'
+import makeDb from '../../../__test__/fixtures/db'
+import makeFakeFood from '../../../__test__/fixtures/food'
 import makeFoodsDb from './foods-db'
 
 describe('foods db', () => {

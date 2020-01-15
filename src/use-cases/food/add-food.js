@@ -1,4 +1,4 @@
-import makeFood from '../food'
+import makeFood from '../../entities/food'
 
 export default function makeAddFood ({ foodsDb }) {
   return async function addFood (foodInfo) {

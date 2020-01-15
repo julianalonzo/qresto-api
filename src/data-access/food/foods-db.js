@@ -1,4 +1,4 @@
-import Id from '../Id'
+import Id from '../../entities/Id'
 
 export default function makeFoodsDb ({ makeDb }) {
   return Object.freeze({

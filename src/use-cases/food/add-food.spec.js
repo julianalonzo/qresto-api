@@ -1,6 +1,6 @@
-import makeDb from '../../__test__/fixtures/db'
-import makeFakeFood from '../../__test__/fixtures/food'
-import makeFoodsDb from '../data-access/foods-db'
+import makeDb from '../../../__test__/fixtures/db'
+import makeFakeFood from '../../../__test__/fixtures/food'
+import { makeFoodsDb } from '../../data-access/food'
 import makeAddFood from './add-food'
 
 describe('add food', () => {

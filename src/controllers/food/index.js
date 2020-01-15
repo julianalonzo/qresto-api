@@ -1,10 +1,4 @@
-import {
-  addFood,
-  editFood,
-  listFoods,
-  removeFood,
-  retrieveFood
-} from '../use-cases'
+import { addFood, editFood, listFoods, removeFood, retrieveFood } from '../../use-cases/food'
 import makeDeleteFood from './delete-food'
 import makeGetFood from './get-food'
 import makeGetFoods from './get-foods'
@@ -27,3 +21,4 @@ const foodController = Object.freeze({
 
 export default foodController
 export { deleteFood, getFoods, getFood, postFood, patchFood }
+
