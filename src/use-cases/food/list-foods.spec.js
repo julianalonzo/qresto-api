@@ -57,38 +57,38 @@ describe('get foods', () => {
     )
   })
 
-  it('can get and filter foods by restaurantId', async () => {
-    const firstFakeRestaurantId = Id.makeId()
-    const secondFakeRestaurantId = Id.makeId()
+  it('can get and filter foods by groupId', async () => {
+    const firstFakeGroupId = Id.makeId()
+    const secondFakeGroupId = Id.makeId()
     const inserts = await Promise.all(
       [
-        makeFakeFood({ restaurantId: firstFakeRestaurantId }),
-        makeFakeFood({ restaurantId: firstFakeRestaurantId }),
-        makeFakeFood({ restaurantId: firstFakeRestaurantId }),
-        makeFakeFood({ restaurantId: firstFakeRestaurantId }),
-        makeFakeFood({ restaurantId: firstFakeRestaurantId }),
-        makeFakeFood({ restaurantId: secondFakeRestaurantId }),
-        makeFakeFood({ restaurantId: secondFakeRestaurantId }),
-        makeFakeFood({ restaurantId: secondFakeRestaurantId }),
-        makeFakeFood({ restaurantId: secondFakeRestaurantId })
+        makeFakeFood({ groupId: firstFakeGroupId }),
+        makeFakeFood({ groupId: firstFakeGroupId }),
+        makeFakeFood({ groupId: firstFakeGroupId }),
+        makeFakeFood({ groupId: firstFakeGroupId }),
+        makeFakeFood({ groupId: firstFakeGroupId }),
+        makeFakeFood({ groupId: secondFakeGroupId }),
+        makeFakeFood({ groupId: secondFakeGroupId }),
+        makeFakeFood({ groupId: secondFakeGroupId }),
+        makeFakeFood({ groupId: secondFakeGroupId })
       ].map(insert => foodsDb.insert(insert))
     )
 
     const insertedFirstRestaurantFoods = inserts.filter(
-      insert => insert.restaurantId === firstFakeRestaurantId
+      insert => insert.groupId === firstFakeGroupId
     )
     const firstRestaurantFoodsFound = await getFoods({
-      restaurantId: firstFakeRestaurantId
+      groupId: firstFakeGroupId
     })
     insertedFirstRestaurantFoods.forEach(insert =>
       expect(firstRestaurantFoodsFound).toContainEqual(insert)
     )
 
     const insertedSecondRestaurantFoods = inserts.filter(
-      insert => insert.restaurantId === secondFakeRestaurantId
+      insert => insert.groupId === secondFakeGroupId
     )
     const secondRestaurantFoodsFound = await getFoods({
-      restaurantId: secondFakeRestaurantId
+      groupId: secondFakeGroupId
     })
     insertedSecondRestaurantFoods.forEach(insert =>
       expect(secondRestaurantFoodsFound).toContainEqual(insert)

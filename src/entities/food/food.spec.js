@@ -57,17 +57,17 @@ describe('food', () => {
     expect(food.isAvailable()).toBe(true)
   })
 
-  it('must have a valid restaurant id', () => {
-    const fakeFoodWithoutRestaurant = makeFakeFood({ restaurantId: undefined })
+  it('must have a valid group id', () => {
+    const fakeFoodWithoutRestaurant = makeFakeFood({ groupId: undefined })
     expect(() => makeFood(fakeFoodWithoutRestaurant)).toThrow(
-      'Food must have a valid restaurant id'
+      'Food must have a valid group id'
     )
 
     const fakeFoodWithInvalidRestaurant = makeFakeFood({
-      restaurantId: 'invalid id'
+      groupId: 'invalid id'
     })
     expect(() => makeFood(fakeFoodWithInvalidRestaurant)).toThrow(
-      'Food must have a valid restaurant id'
+      'Food must have a valid group id'
     )
   })
 })

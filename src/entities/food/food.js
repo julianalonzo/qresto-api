@@ -5,7 +5,7 @@ export default function buildFood ({ Id }) {
     description = '',
     price = 0,
     available = true,
-    restaurantId
+    groupId
   } = {}) {
     if (!Id.isValidId(id)) {
       throw new Error('Food must have a valid id')
@@ -21,8 +21,8 @@ export default function buildFood ({ Id }) {
       throw new Error('Food cannot have a negative price')
     }
 
-    if (!Id.isValidId(restaurantId)) {
-      throw new Error('Food must have a valid restaurant id')
+    if (!Id.isValidId(groupId)) {
+      throw new Error('Food must have a valid group id')
     }
 
     return Object.freeze({
@@ -31,7 +31,7 @@ export default function buildFood ({ Id }) {
       getDescription: () => description,
       getPrice: () => price,
       isAvailable: () => available,
-      getRestaurantId: () => restaurantId,
+      getGroupId: () => groupId,
       markAvailable: () => {
         available = true
       },
