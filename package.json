@@ -15,9 +15,6 @@
   "repository": "https://github.com/julianalonzo/qresto.git",
   "author": "Julian Aubrey Alonzo <julianaubreya@gmail.com>",
   "license": "MIT",
-  "jest": {
-    "verbose": true
-  },
   "devDependencies": {
     "@babel/cli": "^7.7.7",
     "@babel/core": "^7.7.7",
