@@ -58,15 +58,15 @@ describe('food', () => {
   })
 
   it('must have a valid group id', () => {
-    const fakeFoodWithoutRestaurant = makeFakeFood({ groupId: undefined })
-    expect(() => makeFood(fakeFoodWithoutRestaurant)).toThrow(
+    const fakeFoodWithoutGroupId = makeFakeFood({ groupId: undefined })
+    expect(() => makeFood(fakeFoodWithoutGroupId)).toThrow(
       'Food must have a valid group id'
     )
 
-    const fakeFoodWithInvalidRestaurant = makeFakeFood({
+    const fakeFoodWithInvalidGroupId = makeFakeFood({
       groupId: 'invalid id'
     })
-    expect(() => makeFood(fakeFoodWithInvalidRestaurant)).toThrow(
+    expect(() => makeFood(fakeFoodWithInvalidGroupId)).toThrow(
       'Food must have a valid group id'
     )
   })
