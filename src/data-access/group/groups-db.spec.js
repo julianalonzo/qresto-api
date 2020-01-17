@@ -48,7 +48,7 @@ describe('groups db', () => {
     const updated = await groupsDb.update(group)
 
     expect(updated.name).toBe('Favorites')
-    expect(updated.description).toBe('These are all the all-time favorites')
+    expect(updated.description).toBe('These are the all-time favorites')
   })
 
   it('deletes a group', async () => {
