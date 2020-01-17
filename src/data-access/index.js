@@ -1,6 +1,7 @@
 import dotenv from 'dotenv'
 import Sequelize from 'sequelize'
 import { makeFoodModel, makeFoodsDb } from './food'
+import { makeGroupModel } from './group'
 
 dotenv.config()
 
@@ -18,7 +19,11 @@ const sequelize = new Sequelize(
   }
 )
 
+const Group = makeGroupModel({ sequelize, DataTypes: Sequelize })
 const Food = makeFoodModel({ sequelize, DataTypes: Sequelize })
+
+Group.hasMany(Food)
+Food.belongsTo(Group)
 
 export async function makeDb () {
   try {
