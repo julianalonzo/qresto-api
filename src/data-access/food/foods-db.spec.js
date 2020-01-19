@@ -1,24 +1,16 @@
 import makeDb from '../../../__test__/fixtures/db'
 import makeFakeFood from '../../../__test__/fixtures/food'
-import makeFakeGroup from '../../../__test__/fixtures/group'
-import makeGroupsDb from '../group/groups-db'
 import makeFoodsDb from './foods-db'
 
 describe('foods db', () => {
-  let foodsDb, group
-
-  beforeAll(async () => {
-    const groupsDb = makeGroupsDb({ makeDb })
-    const fakeGroup = makeFakeGroup()
-    group = await groupsDb.insert(fakeGroup)
-  })
+  let foodsDb
 
   beforeEach(async () => {
     foodsDb = makeFoodsDb({ makeDb })
   })
 
   it('inserts a food', async () => {
-    const food = makeFakeFood({ groupId: group.id })
+    const food = makeFakeFood()
     const result = await foodsDb.insert(food)
 
     expect(result).toEqual(food)
@@ -27,9 +19,9 @@ describe('foods db', () => {
   it('lists foods', async () => {
     const inserts = await Promise.all(
       [
-        makeFakeFood({ groupId: group.id }),
-        makeFakeFood({ groupId: group.id }),
-        makeFakeFood({ groupId: group.id })
+        makeFakeFood(),
+        makeFakeFood(),
+        makeFakeFood()
       ].map(insert => foodsDb.insert(insert))
     )
 
@@ -42,11 +34,11 @@ describe('foods db', () => {
   it('can list available foods only', async () => {
     const inserts = await Promise.all(
       [
-        makeFakeFood({ groupId: group.id, available: true }),
-        makeFakeFood({ groupId: group.id, available: true }),
-        makeFakeFood({ groupId: group.id, available: true }),
-        makeFakeFood({ groupId: group.id, available: false }),
-        makeFakeFood({ groupId: group.id, available: false })
+        makeFakeFood({ available: true }),
+        makeFakeFood({ available: true }),
+        makeFakeFood({ available: true }),
+        makeFakeFood({ available: false }),
+        makeFakeFood({ available: false })
       ].map(insert => foodsDb.insert(insert))
     )
 
@@ -61,7 +53,7 @@ describe('foods db', () => {
   })
 
   it('finds a food by id', async () => {
-    const food = makeFakeFood({ groupId: group.id })
+    const food = makeFakeFood()
     await foodsDb.insert(food)
 
     const found = await foodsDb.findById(food)
@@ -70,7 +62,7 @@ describe('foods db', () => {
   })
 
   it('updates a food', async () => {
-    const food = makeFakeFood({ groupId: group.id })
+    const food = makeFakeFood()
     await foodsDb.insert(food)
 
     food.name = 'Hamburger'
@@ -87,7 +79,7 @@ describe('foods db', () => {
   })
 
   it('deletes a food', async () => {
-    const food = makeFakeFood({ groupId: group.id })
+    const food = makeFakeFood()
     await foodsDb.insert(food)
 
     expect(await foodsDb.remove(food)).toBe(1)
