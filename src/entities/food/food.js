@@ -1,11 +1,12 @@
-export default function buildFood ({ Id }) {
+export default function buildFood ({ Id, makeImage }) {
   return function makeFood ({
     id = Id.makeId(),
     name,
     description = '',
     price = 0,
     available = true,
-    groupId
+    category,
+    images = []
   } = {}) {
     if (!Id.isValidId(id)) {
       throw new Error('Food must have a valid id')
@@ -21,8 +22,14 @@ export default function buildFood ({ Id }) {
       throw new Error('Food cannot have a negative price')
     }
 
-    if (!Id.isValidId(groupId)) {
-      throw new Error('Food must have a valid group id')
+    if (!category) {
+      throw new Error('Food must have a category')
+    }
+
+    if (!Array.isArray(images)) {
+      throw new Error('Food has invalid images')
+    } else {
+      images.map((image) => makeImage(image))
     }
 
     return Object.freeze({
@@ -31,7 +38,8 @@ export default function buildFood ({ Id }) {
       getDescription: () => description,
       getPrice: () => price,
       isAvailable: () => available,
-      getGroupId: () => groupId,
+      getCategory: () => category,
+      getImages: () => images,
       markAvailable: () => {
         available = true
       },
