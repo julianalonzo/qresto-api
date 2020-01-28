@@ -16,7 +16,8 @@ describe('image', () => {
   })
 
   it('can create an image', () => {
-    const image = makeImage(makeFakeImage())
-    expect(image.getSource()).toBe(image.source)
+    const fakeImage = makeFakeImage()
+    const image = makeImage(fakeImage)
+    expect(image.getSource()).toBe(fakeImage.source)
   })
 })
