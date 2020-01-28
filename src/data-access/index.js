@@ -1,7 +1,6 @@
 import dotenv from 'dotenv'
 import Sequelize from 'sequelize'
 import { makeFoodModel, makeFoodsDb } from './food'
-import { makeGroupModel, makeGroupsDb } from './group'
 
 dotenv.config()
 
@@ -19,18 +18,13 @@ const sequelize = new Sequelize(
   }
 )
 
-const Group = makeGroupModel({ sequelize, DataTypes: Sequelize })
 const Food = makeFoodModel({ sequelize, DataTypes: Sequelize })
-
-Group.hasMany(Food)
-Food.belongsTo(Group)
 
 export async function makeDb () {
   try {
     await sequelize.sync()
 
     return Object.freeze({
-      Group,
       Food
     })
   } catch (e) {
@@ -38,7 +32,6 @@ export async function makeDb () {
   }
 }
 
-const groupsDb = makeGroupsDb({ makeDb })
 const foodsDb = makeFoodsDb({ makeDb })
 
 const db = Object.freeze({
@@ -46,4 +39,4 @@ const db = Object.freeze({
 })
 
 export default db
-export { groupsDb, foodsDb }
+export { foodsDb }
