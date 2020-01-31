@@ -10,7 +10,7 @@ describe('foods db', () => {
   })
 
   it('inserts a food', async () => {
-    const food = makeFakeFood()
+    const { images, ...food } = makeFakeFood()
     const result = await foodsDb.insert(food)
 
     expect(result).toEqual(food)
@@ -53,7 +53,7 @@ describe('foods db', () => {
   })
 
   it('finds a food by id', async () => {
-    const food = makeFakeFood()
+    const { images, ...food } = makeFakeFood()
     await foodsDb.insert(food)
 
     const found = await foodsDb.findById(food)
