@@ -57,17 +57,27 @@ describe('food', () => {
     expect(food.isAvailable()).toBe(true)
   })
 
-  it('must have a valid group id', () => {
-    const fakeFoodWithoutGroupId = makeFakeFood({ groupId: undefined })
-    expect(() => makeFood(fakeFoodWithoutGroupId)).toThrow(
-      'Food must have a valid group id'
-    )
+  it('can have no images', () => {
+    const fakeFood = makeFakeFood({ images: undefined })
+    const food = makeFood(fakeFood)
+    expect(food.getImages()).toEqual([])
+  })
 
-    const fakeFoodWithInvalidGroupId = makeFakeFood({
-      groupId: 'invalid id'
-    })
-    expect(() => makeFood(fakeFoodWithInvalidGroupId)).toThrow(
-      'Food must have a valid group id'
-    )
+  it('images must be an array when defined', () => {
+    const fakeFood = makeFakeFood({ images: 'Hello' })
+    expect(() => makeFood(fakeFood)).toThrow('Food images must be an array')
+  })
+
+  it('does not accept invalid images when defined', () => {
+    const fakeFood = makeFakeFood()
+    expect(() =>
+      makeFood({
+        ...fakeFood,
+        images: fakeFood.images.map(image => ({
+          ...image,
+          source: 'invalid url'
+        }))
+      })
+    ).toThrow('Image source is not a valid url')
   })
 })
