@@ -27,7 +27,7 @@ export default function buildFood ({ Id, makeImage }) {
     }
 
     if (!Array.isArray(images)) {
-      throw new Error('Food has invalid images')
+      throw new Error('Food images must be an array')
     } else {
       images.map((image) => makeImage(image))
     }
