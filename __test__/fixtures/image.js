@@ -8,7 +8,7 @@ const Id = Object.freeze({
 export default function makeFakeImage (overrides) {
   const image = {
     id: Id.makeId(),
-    source: faker.image.food()
+    source: faker.image.avatar()
   }
 
   return {
