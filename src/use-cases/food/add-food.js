@@ -15,7 +15,8 @@ export default function makeAddFood ({ foodsDb }) {
       description: food.getDescription(),
       price: food.getPrice(),
       available: food.isAvailable(),
-      groupId: food.getGroupId()
+      category: food.getCategory(),
+      images: food.getImages()
     })
   }
 }
