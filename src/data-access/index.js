@@ -1,6 +1,7 @@
 import dotenv from 'dotenv'
 import Sequelize from 'sequelize'
 import { makeFoodModel, makeFoodsDb } from './food'
+import { makeImageModel } from './image'
 
 dotenv.config()
 
@@ -19,13 +20,18 @@ const sequelize = new Sequelize(
 )
 
 const Food = makeFoodModel({ sequelize, DataTypes: Sequelize })
+const Image = makeImageModel({ sequelize, DataTypes: Sequelize })
+
+Food.hasMany(Image)
+Image.belongsTo(Food)
 
 export async function makeDb () {
   try {
     await sequelize.sync()
 
     return Object.freeze({
-      Food
+      Food,
+      Image
     })
   } catch (e) {
     console.error('Unable to connect to the database', e)
