@@ -12,8 +12,8 @@ describe('remove food', () => {
   })
 
   it('must include id', () => {
-    const foodToDelete = makeFakeFood({ id: undefined })
-    expect(removeFood(foodToDelete)).rejects.toThrow('Food id is required')
+    const { id, ...foodInfo } = makeFakeFood()
+    expect(removeFood(foodInfo)).rejects.toThrow('Food id is required')
   })
 
   it('handles non-existent foods', async () => {
