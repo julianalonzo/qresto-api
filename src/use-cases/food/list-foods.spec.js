@@ -1,7 +1,6 @@
 import makeDb from '../../../__test__/fixtures/db'
 import makeFakeFood from '../../../__test__/fixtures/food'
 import { makeFoodsDb } from '../../data-access/food'
-import Id from '../../entities/Id'
 import makeGetFoods from './list-foods'
 
 describe('get foods', () => {
@@ -26,7 +25,11 @@ describe('get foods', () => {
 
     const found = await getFoods()
     expect.assertions(inserts.length)
-    inserts.forEach(insert => expect(found).toContainEqual(insert))
+    inserts.forEach(insert =>
+      expect(found).toEqual(
+        expect.arrayContaining([expect.objectContaining({ id: insert.id })])
+      )
+    )
   })
 
   it('can get and filter foods by availability', async () => {
@@ -47,51 +50,59 @@ describe('get foods', () => {
     const insertedAvailableFoods = inserts.filter(insert => insert.available)
     const availableFoodsFound = await getFoods({ available: true })
     insertedAvailableFoods.forEach(insert =>
-      expect(availableFoodsFound).toContainEqual(insert)
+      expect(availableFoodsFound).toEqual(
+        expect.arrayContaining([expect.objectContaining({ id: insert.id })])
+      )
     )
 
     const insertedUnavailableFoods = inserts.filter(insert => !insert.available)
     const unavailableFoodsFound = await getFoods({ available: false })
     insertedUnavailableFoods.forEach(insert =>
-      expect(unavailableFoodsFound).toContainEqual(insert)
+      expect(unavailableFoodsFound).toEqual(
+        expect.arrayContaining([expect.objectContaining({ id: insert.id })])
+      )
     )
   })
 
-  it('can get and filter foods by groupId', async () => {
-    const firstFakeGroupId = Id.makeId()
-    const secondFakeGroupId = Id.makeId()
+  it('can get and filter foods by category', async () => {
+    const firstFakeCategory = 'Main Course'
+    const secondFakeCategory = 'Appetizer'
     const inserts = await Promise.all(
       [
-        makeFakeFood({ groupId: firstFakeGroupId }),
-        makeFakeFood({ groupId: firstFakeGroupId }),
-        makeFakeFood({ groupId: firstFakeGroupId }),
-        makeFakeFood({ groupId: firstFakeGroupId }),
-        makeFakeFood({ groupId: firstFakeGroupId }),
-        makeFakeFood({ groupId: secondFakeGroupId }),
-        makeFakeFood({ groupId: secondFakeGroupId }),
-        makeFakeFood({ groupId: secondFakeGroupId }),
-        makeFakeFood({ groupId: secondFakeGroupId })
+        makeFakeFood({ category: firstFakeCategory }),
+        makeFakeFood({ category: firstFakeCategory }),
+        makeFakeFood({ category: firstFakeCategory }),
+        makeFakeFood({ category: firstFakeCategory }),
+        makeFakeFood({ category: firstFakeCategory }),
+        makeFakeFood({ category: secondFakeCategory }),
+        makeFakeFood({ category: secondFakeCategory }),
+        makeFakeFood({ category: secondFakeCategory }),
+        makeFakeFood({ category: secondFakeCategory })
       ].map(insert => foodsDb.insert(insert))
     )
 
-    const insertedFirstRestaurantFoods = inserts.filter(
-      insert => insert.groupId === firstFakeGroupId
+    const insertedFirstCategoryFoods = inserts.filter(
+      insert => insert.category === firstFakeCategory
     )
-    const firstRestaurantFoodsFound = await getFoods({
-      groupId: firstFakeGroupId
+    const firstCategoryFoodsFound = await getFoods({
+      category: firstFakeCategory
     })
-    insertedFirstRestaurantFoods.forEach(insert =>
-      expect(firstRestaurantFoodsFound).toContainEqual(insert)
+    insertedFirstCategoryFoods.forEach(insert =>
+      expect(firstCategoryFoodsFound).toEqual(
+        expect.arrayContaining([expect.objectContaining({ id: insert.id })])
+      )
     )
 
-    const insertedSecondRestaurantFoods = inserts.filter(
-      insert => insert.groupId === secondFakeGroupId
+    const insertedSecondCategoryFoods = inserts.filter(
+      insert => insert.category === secondFakeCategory
     )
-    const secondRestaurantFoodsFound = await getFoods({
-      groupId: secondFakeGroupId
+    const secondCategoryFoodsFound = await getFoods({
+      category: secondFakeCategory
     })
-    insertedSecondRestaurantFoods.forEach(insert =>
-      expect(secondRestaurantFoodsFound).toContainEqual(insert)
+    insertedSecondCategoryFoods.forEach(insert =>
+      expect(secondCategoryFoodsFound).toEqual(
+        expect.arrayContaining([expect.objectContaining({ id: insert.id })])
+      )
     )
   })
 })
