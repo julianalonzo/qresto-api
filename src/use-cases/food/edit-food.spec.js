@@ -3,7 +3,7 @@ import makeFakeFood from '../../../__test__/fixtures/food'
 import { makeFoodsDb } from '../../data-access/food'
 import makeEditFood from './edit-food'
 
-describe('delete food', () => {
+describe('edits food', () => {
   let foodsDb, editFood
 
   beforeAll(() => {
@@ -12,8 +12,8 @@ describe('delete food', () => {
   })
 
   it('must include id', () => {
-    const foodToEdit = makeFakeFood({ id: undefined })
-    expect(editFood(foodToEdit)).rejects.toThrow('Food id is required')
+    const { id, ...foodInfo } = makeFakeFood()
+    expect(editFood(foodInfo)).rejects.toThrow('Food id is required')
   })
 
   it('requires name when supplied', async () => {
@@ -41,14 +41,12 @@ describe('delete food', () => {
   })
 
   it('modifies a food', async () => {
-    const newFood = await foodsDb.insert(makeFakeFood())
+    const food = makeFakeFood()
+    await foodsDb.insert(food)
 
-    newFood.name = 'Hamburger'
-    newFood.description = 'This is a hamburger'
-    newFood.price = 123
-    newFood.available = false
+    const modifiedFood = makeFakeFood({ id: food.id })
 
-    const updatedFood = await editFood(newFood)
-    expect(updatedFood).toEqual(newFood)
+    const updatedFood = await foodsDb.update(modifiedFood)
+    expect(updatedFood).toMatchObject(modifiedFood)
   })
 })
