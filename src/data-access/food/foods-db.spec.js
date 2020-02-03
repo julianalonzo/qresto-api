@@ -78,11 +78,11 @@ describe('foods db', () => {
     const food = makeFakeFood()
     await foodsDb.insert(food)
 
-    const updatedFood = makeFakeFood({ id: food.id })
+    const modifiedFood = makeFakeFood({ id: food.id })
 
-    const updated = await foodsDb.update(updatedFood)
+    const updated = await foodsDb.update(modifiedFood)
 
-    expect(updated).toMatchObject(updatedFood)
+    expect(updated).toMatchObject(modifiedFood)
   })
 
   it('deletes a food', async () => {
