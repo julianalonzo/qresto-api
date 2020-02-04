@@ -25,10 +25,17 @@ const Image = makeImageModel({ sequelize, DataTypes: Sequelize })
 Food.hasMany(Image)
 Image.belongsTo(Food)
 
+sequelize
+  .sync()
+  .then(() => {
+    console.log('Database synced')
+  })
+  .catch(e => {
+    console.log('Database syncing error', e)
+  })
+
 export async function makeDb () {
   try {
-    await sequelize.sync()
-
     return Object.freeze({
       Food,
       Image
