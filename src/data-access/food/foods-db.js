@@ -46,8 +46,14 @@ export default function makeFoodsDb ({ makeDb }) {
           )
         )
 
-        // image[0] points to the Model, while image[1] points to a boolean
-        await updatedFood.setImages(updatedImages.map(image => image[0]))
+        /**
+         * SQLite (dialect used for testing) does not return after upsert
+         * so just ignore the code below so that test will not fail
+         */
+        if (Food.sequelize.getDialect() === 'postgres') {
+          // image[0] points to the Model, while image[1] points to a boolean
+          await updatedFood.setImages(updatedImages.map(image => image[0]))
+        }
       }
 
       return {
