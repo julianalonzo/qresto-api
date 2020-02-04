@@ -36,10 +36,18 @@ export default function makeFoodsDb ({ makeDb }) {
 
       if (images) {
         const updatedImages = await Promise.all(
-          images.map(image => Image.create(image))
+          images.map(image =>
+            Image.upsert(
+              { ...image },
+              {
+                returning: true
+              }
+            )
+          )
         )
 
-        await updatedFood.setImages(updatedImages)
+        // image[0] points to the Model, while image[1] points to a boolean
+        await updatedFood.setImages(updatedImages.map(image => image[0]))
       }
 
       return {

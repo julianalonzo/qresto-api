@@ -18,7 +18,14 @@ export default function makeEditFood ({ foodsDb }) {
       name: modifiedFood.getName(),
       description: modifiedFood.getDescription(),
       price: modifiedFood.getPrice(),
-      available: modifiedFood.isAvailable()
+      available: modifiedFood.isAvailable(),
+      images: modifiedFood
+        .getImages()
+        .map(image => ({
+          id: image.getId(),
+          source: image.getSource(),
+          foodId: modifiedFood.getId()
+        }))
     })
 
     return { ...existing, ...updatedFood }
